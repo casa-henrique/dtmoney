@@ -1,25 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { createServer } from "miragejs";
+import { createServer, Model } from "miragejs";
 
 import { App } from "./App";
 
 createServer({
+  models: {
+    //Banco de dados do miragejs
+    transaction: Model,
+  },
+
   routes() {
     this.namespace = "api"; // Quando fizermos uma chamada api ele vai direcionar para o miragejs
 
     this.get("/transactions", () => {
-      return [
-        {
-          id: 1,
-          title: "Transaction 1",
-          amount: 400,
-          type: "deposit",
-          category: "Food",
-          CreatedAt: new Date(),
-        },
-      ];
+      return this.schema.all("transactions");
+    });
+    this.post("/transactions", (schema, request) => {
+      const data = JSON.parse(request.requestBody); //Transformando a resposta em json
+
+      return schema.create("transaction", data); //schema é o banco de dados
     });
   },
 });
