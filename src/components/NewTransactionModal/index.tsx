@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Modal from "react-modal";
-import { Container, TransactionTypeContainer } from "./styles";
+
+import { Container, TransactionTypeContainer, TypeButton } from "./styles";
 
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
@@ -14,6 +16,8 @@ export function NewTransactionModal({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) {
+  const [type, setType] = useState("deposit");
+
   return (
     <Modal
       isOpen={isOpen}
@@ -36,12 +40,24 @@ export function NewTransactionModal({
         <input type="number" placeholder="Valor" />
 
         <TransactionTypeContainer>
-          <button type="button">
-            <img src={incomeImg} alt="Entrada" /> <span>Entrada</span>
-          </button>
-          <button type="button">
-            <img src={outcomeImg} alt="Saida" /> <span>Saida</span>
-          </button>
+          <TypeButton
+            type="button"
+            onClick={() => setType("deposit")}
+            isActive={type == "deposit"} //Propriedade que iremos passar pro componente do styled-componentes
+            //para mudar a classe do elemento podemos usar className={ type == 'deposit' ? 'active' : ''}
+          >
+            <img src={incomeImg} alt="Entrada" />
+            <span>Entrada</span>
+          </TypeButton>
+
+          <TypeButton
+            type="button"
+            onClick={() => setType("withdraw")}
+            isActive={type == "withdraw"}
+          >
+            <img src={outcomeImg} alt="Saida" />
+            <span>Saida</span>
+          </TypeButton>
         </TransactionTypeContainer>
 
         <input placeholder="Categoria" />
