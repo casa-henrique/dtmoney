@@ -44,6 +44,7 @@ export function NewTransactionModal({
             type="button"
             onClick={() => setType("deposit")}
             isActive={type == "deposit"} //Propriedade que iremos passar pro componente do styled-componentes
+            activeColor='green'
             //para mudar a classe do elemento podemos usar className={ type == 'deposit' ? 'active' : ''}
           >
             <img src={incomeImg} alt="Entrada" />
@@ -54,6 +55,7 @@ export function NewTransactionModal({
             type="button"
             onClick={() => setType("withdraw")}
             isActive={type == "withdraw"}
+            activeColor='red'
           >
             <img src={outcomeImg} alt="Saida" />
             <span>Saida</span>

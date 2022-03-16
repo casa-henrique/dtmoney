@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken } from "polished"; // Biblioteca com diversas funções do js para manipulação de cores
+import { darken, transparentize } from "polished"; // Biblioteca com diversas funções do js para manipulação de cores
 
 export const Container = styled.form`
   h2 {
@@ -63,14 +63,23 @@ export const TransactionTypeContainer = styled.div`
 
 interface TypeButtonProps {
   isActive: boolean;
+  activeColor: "green" | "red";
 }
+
+const colors = {
+  green: "#33CC95",
+  red: "#E52E4D",
+};
 
 export const TypeButton = styled.button<TypeButtonProps>`
   height: 4rem;
   border: 1px solid #d7d7d7;
   border-radius: 0.25rem;
 
-  background: ${(props) => (props.isActive ? "#eee" : "transparent")};
+  background: ${(props) =>
+    props.isActive
+      ? transparentize(0.9, colors[props.activeColor])
+      : "transparent"};
   //Quando passamos uma função dentro de uma interpolação automaticamente o styled-components passa todas as propriedades para ela
 
   display: flex;
