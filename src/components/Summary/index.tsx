@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import { Container } from "./styles";
 
 import incomeImg from "../../assets/income.svg";
