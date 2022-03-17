@@ -1,8 +1,6 @@
-import { useContext } from "react";
-
 import { Container } from "./styles";
 
-import { TransactionsContext } from "../../TransactionsContext";
+import { useTransactions } from "../../hooks/useTransactions";
 
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
@@ -10,7 +8,7 @@ import totalImg from "../../assets/total.svg";
 
 
 export function Summary() {
-  const {transactions} = useContext(TransactionsContext);
+  const {transactions} = useTransactions();
 
   // reduce é usado para percorrer um as transações e calcular um total
   const summary = transactions.reduce((acc, transaction) => {
