@@ -26,15 +26,22 @@ export function NewTransactionModal({
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault(); //Função para não recarregar a página após o submit
 
-    createTransaction({
+    await createTransaction({
       title,
       type,
       amount,
       category
     })
+
+    setTitle('')
+    setType('deposit')
+    setAmount(0)
+    setCategory('')
+
+    onRequestClose();
   }
 
   return (
